@@ -1,1 +1,10 @@
-const thing = 'thing';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+const root = document.getElementById('app');
+
+ReactDOM.render(
+  <div><App /></div>,
+  root
+);

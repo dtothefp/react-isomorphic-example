@@ -1,4 +1,7 @@
+import fs from 'fs';
+
 export default function(gulp, plugins, config) {
+  const {cwd} = config;
   const {koa: Koa} = plugins;
 
   return cb => {
@@ -6,7 +9,9 @@ export default function(gulp, plugins, config) {
 
     // response
     app.use(ctx => {
-      ctx.body = 'Hello Koa';
+      if (ctx.request.url === '/') {
+        ctx.body = fs.readFileSync(cwd('src/index.html'), 'utf8');
+      }
     });
 
     app.listen(3000, cb);

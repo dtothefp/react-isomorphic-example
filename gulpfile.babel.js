@@ -22,5 +22,5 @@ const tasks = Object.keys(dirs).reduce((acc, task) => ({
 
 gulp.task('webpack', tasks.webpack);
 gulp.task('koa', tasks.koa);
-gulp.task('default', gulp.parallel('webpack', 'koa'));
+gulp.task('default', gulp.series('webpack', 'koa'));
 
