@@ -40,6 +40,17 @@ export default function(gulp, plugins, config) {
               'react'
             ],
             plugins: [
+              [`transform-regenerator`, {
+                asyncGenerators: true,
+                generators: true,
+                async: false
+              }],
+              // [
+              // `transform-runtime`, {
+              // polyfill: false,
+              // regenerator: true,
+              // },
+              // ],
               [ `react-transform`, {
                 transforms: [{
                   transform: `react-transform-hmr`,
@@ -75,7 +86,6 @@ export default function(gulp, plugins, config) {
     app.use(hotMiddleware(compiler));
 
     compiler.plugin('done', (stats) => {
-      console.log(stats.toString());
       if (!hasRun) {
         hasRun = true;
         app.listen(hotPort, (err) => {

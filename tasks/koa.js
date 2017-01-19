@@ -1,3 +1,5 @@
+import proxy from 'koa-proxy';
+import convert from 'koa-convert';
 import fs from 'fs';
 
 export default function(gulp, plugins, config) {
@@ -6,6 +8,11 @@ export default function(gulp, plugins, config) {
 
   return cb => {
     const app = new Koa();
+
+    app.use(convert(proxy({
+      host: 'http://localhost:8080',
+      match: /\.hot-update\.js(on)?$/
+    })));
 
     // response
     app.use(ctx => {
